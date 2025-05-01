@@ -1,0 +1,9 @@
+{
+	"name": "gemadf",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "402c1637-24c8-48fd-b0fc-874045f9ed38",
+		"tenantId": "51919faa-a7c3-43e9-bc7d-73c7742bc6a3"
+	}
+}
