@@ -1,0 +1,62 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DS_SourceCSV",
+						"type": "DatasetReference"
+					},
+					"name": "dataflowsource1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable1",
+						"type": "DatasetReference"
+					},
+					"name": "dataflowsink1",
+					"rejectedDataLinkedService": {
+						"referenceName": "LS_BlobStorage",
+						"type": "LinkedServiceReference"
+					}
+				}
+			],
+			"transformations": [
+				{
+					"name": "filter1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          customer_id as string,",
+				"          first_name as string,",
+				"          last_name as string,",
+				"          email as string,",
+				"          city as string,",
+				"          state as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> dataflowsource1",
+				"dataflowsource1 filter(state=='xxx') ~> filter1",
+				"filter1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     truncate:true,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     outputAssertFailedRows: true,",
+				"     assertFailure_container: 'csvfiles') ~> dataflowsink1"
+			]
+		}
+	}
+}
