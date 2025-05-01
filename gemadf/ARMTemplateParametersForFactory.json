@@ -1,0 +1,36 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "gemadf"
+		},
+		"AzureSqlDatabase1_password": {
+			"value": ""
+		},
+		"AzureSqlDatabase2_password": {
+			"value": ""
+		},
+		"LS_BlobStorage_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"value": "kiitserver.database.windows.net"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"value": "dbkiitdest"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_userName": {
+			"value": "testuser"
+		},
+		"AzureSqlDatabase2_properties_typeProperties_server": {
+			"value": "kiitserver.database.windows.net"
+		},
+		"AzureSqlDatabase2_properties_typeProperties_database": {
+			"value": "dbkiitdest"
+		},
+		"AzureSqlDatabase2_properties_typeProperties_userName": {
+			"value": "testuser"
+		}
+	}
+}
