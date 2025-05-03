@@ -9,20 +9,16 @@
 						"referenceName": "DS_SourceCSV",
 						"type": "DatasetReference"
 					},
-					"name": "dataflowsource1"
+					"name": "source1"
 				}
 			],
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "AzureSqlTable1",
+						"referenceName": "DS_SinkSQL",
 						"type": "DatasetReference"
 					},
-					"name": "dataflowsink1",
-					"rejectedDataLinkedService": {
-						"referenceName": "LS_BlobStorage",
-						"type": "LinkedServiceReference"
-					}
+					"name": "sink1"
 				}
 			],
 			"transformations": [
@@ -32,17 +28,16 @@
 			],
 			"scriptLines": [
 				"source(output(",
-				"          customer_id as string,",
-				"          first_name as string,",
-				"          last_name as string,",
-				"          email as string,",
-				"          city as string,",
-				"          state as string",
+				"          product_id as string,",
+				"          product_name as string,",
+				"          brand as string,",
+				"          category as string,",
+				"          price as string",
 				"     ),",
-				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> dataflowsource1",
-				"dataflowsource1 filter(state=='xxx') ~> filter1",
+				"     allowSchemaDrift: false,",
+				"     validateSchema: true,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source1 filter(price>='500') ~> filter1",
 				"filter1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
@@ -53,9 +48,7 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError',",
-				"     outputAssertFailedRows: true,",
-				"     assertFailure_container: 'csvfiles') ~> dataflowsink1"
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
 			]
 		}
 	}
